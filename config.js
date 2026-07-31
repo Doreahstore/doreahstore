@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 // ---- 2. IMGBB (stores your product photos, gives back a URL) ----
 // Get a free key at: https://api.imgbb.com/  (click "Get API Key")
-const IMGBB_API_KEY = "YOUR_IMGBB_API_KEY";
+const IMGBB_API_KEY = "47782a3bb044db07229a7ee9e16ba23a";
 
 // ---- 3. WHATSAPP ----
 const WHATSAPP_NUMBER = "19548024675"; // no + or spaces
