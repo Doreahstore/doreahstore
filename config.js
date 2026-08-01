@@ -6,12 +6,12 @@
 // ---- 1. FIREBASE (stores your product list: name, price, category) ----
 // Get this from: Firebase Console → Project Settings → General → Your apps → SDK setup
 const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+   apiKey: "AIzaSyCZ-cUxfRhN8vcK-t1P2RLTbYVtwPVoGNA",
+  authDomain: "doreahstore.firebaseapp.com",
+  projectId: "doreahstore",
+  storageBucket: "doreahstore.firebasestorage.app",
+  messagingSenderId: "70100452147",
+  appId: "1:70100452147:web:44a99f8f40e0023a7df446"
 };
 
 // ---- 2. IMGBB (stores your product photos, gives back a URL) ----
