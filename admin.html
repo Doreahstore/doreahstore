@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doreah Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Jost', sans-serif; background: #fdf8f7; color: #2a1414; margin: 0; padding: 2rem; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #8c1c2a; }
+  .card { background: #fff; border-radius: 10px; padding: 1.8rem; max-width: 480px; margin: 4rem auto; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  input, select { width: 100%; padding: 0.7rem; margin-bottom: 0.9rem; border: 1px solid rgba(196,40,58,0.25); border-radius: 6px; font-family: inherit; font-size: 0.9rem; }
+  label { font-size: 0.8rem; font-weight: 500; display: block; margin-bottom: 0.3rem; }
+  button { background: #9b3347; color: #fff; border: none; padding: 0.8rem 1.4rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  button:hover { background: #8c1c2a; }
+  button.danger { background: transparent; color: #c4283a; border: 1px solid #c4283a; padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+  #admin-screen { display: none; max-width: 1000px; margin: 0 auto; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .form-card { background: #fff; padding: 1.8rem; border-radius: 10px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .checkbox-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+  .checkbox-row input { width: auto; margin: 0; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; }
+  th, td { padding: 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #f0e6e6; }
+  th { background: #faf0ee; }
+  .warning { background: #fff3cd; border: 1px solid #ffe69c; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.85rem; display: none; }
+  #cancel-edit-btn { background: transparent; color: #5e2f30; border: 1px solid #5e2f30; margin-left: 0.6rem; display: none; }
+  .error { color: #c4283a; font-size: 0.85rem; margin-top: 0.4rem; }
+  .variant-row { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr 1.2fr auto; gap: 0.6rem; align-items: center; margin-bottom: 0.7rem; }
+  .variant-row input { margin-bottom: 0; }
+  .variant-row button { background: transparent; color: #c4283a; border: 1px solid #c4283a; padding: 0.5rem 0.7rem; font-size: 0.75rem; }
+  @media (max-width: 700px) { .variant-row { grid-template-columns: 1fr 1fr; } }
+  .collection-admin-row { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid #f0e6e6; }
+  .collection-admin-row:last-child { border-bottom: none; }
+  .collection-admin-info { flex: 1; font-size: 0.85rem; }
+  .collection-status { font-size: 0.75rem; color: #5e2f30; }
+  .collection-admin-actions { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-end; }
+  .collection-admin-actions button { font-size: 0.75rem; padding: 0.5rem 0.8rem; white-space: nowrap; }
+  .collection-admin-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .upload-lock-label { font-size: 0.72rem; color: #9b3347; cursor: pointer; text-decoration: underline; text-align: right; }
+  .upload-lock-label input { display: none; }
+  @media (max-width: 600px) { .collection-admin-row { flex-wrap: wrap; } .collection-admin-actions { align-items: flex-start; } }
+</style>
+</head>
+<body>
+
+<div id="login-screen" class="card">
+  <h1>Doreah Admin</h1>
+  <label for="login-pass">Password</label>
+  <input type="password" id="login-pass" placeholder="Enter admin password">
+  <button onclick="login()">Log In</button>
+  <div class="error" id="login-error"></div>
+</div>
+
+<div id="admin-screen">
+  <div class="top-bar">
+    <h1>Manage Products</h1>
+    <div>
+      <a href="index.html" style="margin-right:1rem; font-size:0.85rem;">← View Store</a>
+      <button onclick="logout()" style="background:#5e2f30;">Log Out</button>
+    </div>
+  </div>
+
+  <div class="warning" id="firebase-warning">
+    Firebase isn't configured yet in <code>config.js</code>, so changes here won't be visible to customers.
+    Fill in your Firebase project details to go live.
+  </div>
+
+  <div class="form-card">
+    <h2 id="form-title" style="font-family:'Cormorant Garamond',serif;">Add a Product</h2>
+    <form id="product-form" onsubmit="saveProduct(event)">
+      <input type="hidden" id="f-image-current">
+      <div class="form-row">
+        <div>
+          <label>Product Name</label>
+          <input type="text" id="f-name" required>
+        </div>
+        <div>
+          <label>Category</label>
+          <input type="text" id="f-category" placeholder="Matte Lipsticks / Lip Glosses">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Price ($)</label>
+          <input type="number" step="0.01" id="f-price" required>
+        </div>
+        <div>
+          <label>Sale Price ($) — optional</label>
+          <input type="number" step="0.01" id="f-saleprice">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Badge — optional</label>
+          <input type="text" id="f-badge" placeholder="Best Seller / New In">
+        </div>
+        <div>
+          <label>Product Photo</label>
+          <input type="file" id="f-image" accept="image/*">
+        </div>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="f-favorite">
+        <label style="margin:0;">Show in "Doreah Favorites"</label>
+      </div>
+
+      <div style="margin: 1.4rem 0 1rem; padding-top: 1rem; border-top: 1px solid #f0e6e6;">
+        <label style="font-size:0.9rem; margin-bottom:0.5rem;">Variants (optional — e.g. different shades)</label>
+        <p style="font-size:0.75rem; color:#5e2f30; margin-bottom:0.8rem;">
+          Leave price blank on a variant to use the main price above. Leave photo blank to use the main photo above.
+        </p>
+        <div id="variants-container"></div>
+        <button type="button" onclick="addVariantRow()" style="background:transparent;color:#9b3347;border:1px solid #9b3347;">+ Add Variant</button>
+      </div>
+
+      <button type="submit">Save Product</button>
+      <button type="button" id="cancel-edit-btn" onclick="resetForm()">Cancel Edit</button>
+      <div class="error" id="form-status"></div>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Photo</th><th>Name</th><th>Category</th><th>Price</th><th>Favorite</th><th>Actions</th></tr>
+    </thead>
+    <tbody id="product-table-body"></tbody>
+  </table>
+
+  <div class="form-card" style="margin-top:2rem;">
+    <h2 style="font-family:'Cormorant Garamond',serif;">Collection Thumbnails</h2>
+    <p style="font-size:0.8rem; color:#5e2f30; margin-bottom:1rem;">
+      By default, each collection card on the homepage shows the photo of the most recently added
+      product in that category. Lock a thumbnail to keep it fixed even as you add new products.
+    </p>
+    <div id="collections-admin"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
