@@ -31,7 +31,7 @@ const ADMIN_PASSWORD = "doreah2026";
 // your photo at https://imgbb.com/ (no account needed for a one-off image)
 // and paste the "Direct link" it gives you.
 // Leave this as "" to keep the plain pink gradient background.
-const HERO_IMAGE_URL = "";
+const HERO_IMAGE_URL = "https://i.ibb.co/jPBKc1m2/5001508271558429594-121.jpg";
 
 // ---- 6. SCROLLING TICKER TEXT (optional) ----
 // Shown as a scrolling strip under the hero, like your Shopify site.
