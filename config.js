@@ -21,7 +21,7 @@ const firebaseConfig = {
 const IMGBB_API_KEY = "47782a3bb044db07229a7ee9e16ba23a";
 
 // ---- 3. WHATSAPP (where orders are sent) ----
-const WHATSAPP_NUMBER = "19548024675"; // country code + number, no + or spaces
+const WHATSAPP_NUMBER = "15174621628"; // country code + number, no + or spaces
 
 // ---- 4. ADMIN LOGIN ----
 // There is no password in this file anymore (anyone could read it on GitHub).
