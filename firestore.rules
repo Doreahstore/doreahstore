@@ -28,12 +28,13 @@ service cloud.firestore {
     match /orders/{id} {
       allow create: if
         request.resource.data.keys().hasOnly(
-          ['orderId', 'name', 'method', 'note', 'address', 'items', 'subtotal', 'status', 'createdAt'])
+          ['orderId', 'name', 'phone', 'method', 'note', 'address', 'items', 'subtotal', 'status', 'createdAt'])
         && request.resource.data.status == 'new'
         && request.resource.data.createdAt == request.time
         && request.resource.data.orderId is string && request.resource.data.orderId.size() <= 20
         && request.resource.data.name is string
         && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 80
+        && request.resource.data.phone is string && request.resource.data.phone.size() <= 25
         && request.resource.data.method in ['Delivery', 'Pickup']
         && request.resource.data.address is string && request.resource.data.address.size() <= 300
         && request.resource.data.note is string && request.resource.data.note.size() <= 500
@@ -41,6 +42,24 @@ service cloud.firestore {
         && request.resource.data.items.size() > 0 && request.resource.data.items.size() <= 50
         && request.resource.data.subtotal is number;
       allow read, update, delete: if isAdmin();
+    }
+
+    // Public tracking record: status only, NO name / phone / address.
+    // Anyone with the exact order number can look it up (get), but nobody
+    // can list or browse them. Only you can change the status.
+    match /tracking/{orderId} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create: if isAdmin() || (
+        request.resource.data.keys().hasOnly(['orderId', 'method', 'status', 'items', 'createdAt'])
+        && request.resource.data.orderId == orderId
+        && request.resource.data.status == 'new'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.method in ['Delivery', 'Pickup']
+        && request.resource.data.items is list
+        && request.resource.data.items.size() > 0 && request.resource.data.items.size() <= 50
+      );
+      allow update, delete: if isAdmin();
     }
 
     // Everything else is locked

@@ -7,8 +7,8 @@
 // ---- 1. FIREBASE (stores products, collection cards and orders) ----
 // Firebase Console → Project Settings → General → Your apps → SDK setup.
 // These values are safe to be public — security comes from firestore.rules.
- const firebaseConfig = {
-  apiKey: "AIzaSyBvx8IVJ2qZyvflmImv9xRWsKVVhL1g7L0",
+const firebaseConfig = {
+  apiKey: "AIzaSyBvx8IVJ2qZyvflmImv9xRWsKVVhL1g7LO",
   authDomain: "doreahstore-b6644.firebaseapp.com",
   projectId: "doreahstore-b6644",
   storageBucket: "doreahstore-b6644.firebasestorage.app",
@@ -21,7 +21,7 @@
 const IMGBB_API_KEY = "47782a3bb044db07229a7ee9e16ba23a";
 
 // ---- 3. WHATSAPP (where orders are sent) ----
-const WHATSAPP_NUMBER = "15174621628"; // country code + number, no + or spaces
+const WHATSAPP_NUMBER = "19548024675"; // country code + number, no + or spaces
 
 // ---- 4. ADMIN LOGIN ----
 // There is no password in this file anymore (anyone could read it on GitHub).
