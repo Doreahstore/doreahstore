@@ -7,16 +7,12 @@
 // ---- 1. FIREBASE (stores products, collection cards and orders) ----
 // Firebase Console → Project Settings → General → Your apps → SDK setup.
 // These values are safe to be public — security comes from firestore.rules.
-const firebaseConfig = {
-apikey: "AlzaSyBvx8IVJ2qZyvflmlmv9xRWsKVVhL1g
-7LO",
-authDomain: "doreahstore-b6644.firebaseapp.com",
-projectld: "doreahstore-b6644", 
-storageBucket: "doreahstore-b6644.firebasestorage.app", 
-messagingSenderld: 911479957331", 
-appld:
-"1:911479957331:web:b7b2bfabe9048a47b9
-63a6"
+ apiKey: "AIzaSyBvx8IVJ2qZyvflmImv9xRWsKVVhL1g7L0",
+  authDomain: "doreahstore-b6644.firebaseapp.com",
+  projectId: "doreahstore-b6644",
+  storageBucket: "doreahstore-b6644.firebasestorage.app",
+  messagingSenderId: "911479957331",
+  appId: "1:911479957331:web:b7b2bfabe9048a47b963a6"
 };
 
 // ---- 2. IMGBB (hosts your product photos) ----
