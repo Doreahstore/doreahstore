@@ -8,12 +8,15 @@
 // Firebase Console → Project Settings → General → Your apps → SDK setup.
 // These values are safe to be public — security comes from firestore.rules.
 const firebaseConfig = {
-  apiKey: "AIzaSyCZ-cUxfRhN8vcK-t1P2RLTbYVtwPVoGNA",
-  authDomain: "doreahstore.firebaseapp.com",
-  projectId: "doreahstore",
-  storageBucket: "doreahstore.firebasestorage.app",
-  messagingSenderId: "70100452147",
-  appId: "1:70100452147:web:44a99f8f40e0023a7df446"
+apikey: "AlzaSyBvx8IVJ2qZyvflmlmv9xRWsKVVhL1g
+7LO",
+authDomain: "doreahstore-b6644.firebaseapp.com",
+projectld: "doreahstore-b6644", 
+storageBucket: "doreahstore-b6644.firebasestorage.app", 
+messagingSenderld: 911479957331", 
+appld:
+"1:911479957331:web:b7b2bfabe9048a47b9
+63a6"
 };
 
 // ---- 2. IMGBB (hosts your product photos) ----
