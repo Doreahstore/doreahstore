@@ -1,0 +1,50 @@
+rules_version = '2';
+
+// ============================================================
+// DOREAH — Firestore security rules
+// Deploy with:  firebase deploy --only firestore:rules
+// (or paste into Firebase Console → Firestore Database → Rules → Publish)
+// Replace the email below with the email you log into admin.html with.
+// ============================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in ['YOUR_ADMIN_EMAIL@gmail.com'];
+    }
+
+    // Anyone can see products and collection cards; only you can change them
+    match /products/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /collectionSettings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Orders are created ONLY by the server (the createCheckout Cloud Function,
+    // after it has re-priced the bag). Browsers cannot create or edit them,
+    // so nobody can fake an order or a price. Only you can read and manage them.
+    match /orders/{id} {
+      allow read, update, delete: if isAdmin();
+      allow create: if false;
+    }
+
+    // Public tracking record: status only, NO name / phone / address.
+    // Anyone with the exact order number can look it up (get), but nobody
+    // can list or browse them. Created by the server; only you can change it.
+    match /tracking/{orderId} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create: if false;
+      allow update, delete: if isAdmin();
+    }
+
+    // Everything else is locked
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
