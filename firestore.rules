@@ -11,7 +11,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email in ['YOUR_ADMIN_EMAIL@gmail.com'];
+        && request.auth.token.email in ['doreahstore@outlook.com'];
     }
 
     // Anyone can see products and collection cards; only you can change them
