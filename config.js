@@ -8,7 +8,7 @@
 // Firebase Console → Project Settings → General → Your apps → SDK setup.
 // These values are safe to be public — security comes from firestore.rules.
 const firebaseConfig = {
-  apiKey: "AIzaSyBvx8IVJ2qZyvflmImv9xRWsKVVhL1g7LO",
+  apiKey: "AIzaSyBvx8IVJ2qZyvflmImv9xRWsKVVhL1g7L0",
   authDomain: "doreahstore-b6644.firebaseapp.com",
   projectId: "doreahstore-b6644",
   storageBucket: "doreahstore-b6644.firebasestorage.app",
