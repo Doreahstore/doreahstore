@@ -23,7 +23,7 @@ const IMGBB_API_KEY = "47782a3bb044db07229a7ee9e16ba23a";
 // ---- 2b. CHECKOUT API (Vercel — replaces Firebase Cloud Functions) ----
 // After you deploy the /vercel-api project to Vercel, paste its URL here,
 // e.g. "https://doreah-checkout-api.vercel.app/api/create-checkout"
-const CHECKOUT_API_URL = "";
+const CHECKOUT_API_URL = "https://doreahstore.vercel.app/api/create-checkout";
 
 // ---- 3. WHATSAPP (support chat button only; orders are now paid by card) ----
 const WHATSAPP_NUMBER = "19548024675"; // country code + number, no + or spaces
