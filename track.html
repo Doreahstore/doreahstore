@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Track Your Order — Doreah Beauty</title>
+<meta name="description" content="Track your Doreah Beauty order with your order number.">
+<meta name="theme-color" content="#8c1c2a">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%238c1c2a'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23f7e3e2'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="track-page">
+
+<header class="site-header scrolled">
+  <a href="index.html" class="back-link">← Shop</a>
+  <a href="index.html" class="site-logo" aria-label="Doreah home">Doreah</a>
+  <span class="back-link" aria-hidden="true" style="visibility:hidden">← Shop</span>
+</header>
+
+<main class="track-main">
+  <div class="track-hero">
+    <span class="section-tag">Order Status</span>
+    <h1 class="section-title">Track Your <em>Order</em></h1>
+    <p class="section-sub">Enter the order number from your confirmation page or receipt (it looks like <strong>DB-KX4F9-7QM</strong>).</p>
+  </div>
+
+  <form class="track-form" id="track-form" novalidate>
+    <label class="sr-only" for="track-input">Order number</label>
+    <input id="track-input" class="field" placeholder="DB-XXXXX-XXX" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20">
+    <button type="submit" class="btn btn-primary">Track</button>
+  </form>
+
+  <div class="recent-orders" id="recent-orders" hidden></div>
+
+  <div id="track-result" aria-live="polite"></div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script src="track.js"></script>
+</body>
+</html>
