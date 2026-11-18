@@ -3,7 +3,7 @@
 A fast, mobile-first lipstick store. Customers browse shades, fill their bag and send the order to you on **WhatsApp** in one tap. You manage everything from **admin.html** on your phone.
 
 **Stack:** plain HTML/CSS/JS · Firebase (Firestore + Auth) · ImgBB for photos · GitHub Pages hosting. No build step.
-
+  .
 ---
 
 ## ✨ What's in it
